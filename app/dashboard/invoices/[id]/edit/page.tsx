@@ -3,6 +3,16 @@ import Breadcrumbs from '@/app/ui/invoices/breadcrumbs';
 import { fetchInvoiceById, fetchCustomers } from '@/app/lib/data';
 import { notFound } from 'next/navigation';
  
+export async function generateMetadata({params} : {params: {id: string}}){
+  const invoiceId = params.id;
+  const invoiceMetadata = {
+    title: `Invoice No.${params.id}`,
+  }
+  return {
+    title: invoiceMetadata.title
+  }
+}
+
 export default async function Page({ params} : {params: {id: string }}) {
   const id = params.id;  
   const [invoice, customers] = await Promise.all([
